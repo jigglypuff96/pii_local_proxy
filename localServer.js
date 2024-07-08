@@ -52,6 +52,18 @@ app.post("/abstract", async (req, res) => {
   }
 });
 
+app.get("/openaiapikey", async (req, res) => {
+  try {
+    const response = await axios.get(`${vmServerUrl}/openaiapikey`, req.body, {
+      headers: { "Content-Type": "application/json" },
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error communicating with VM server" });
+  }
+});
+
 app.get("/", async (req, res) => {
   try {
     console.log("GET 4000");
